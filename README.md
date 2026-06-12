@@ -32,30 +32,12 @@ Use Superpowers if you want the full methodology. Use MyPowers if you want a lig
 
 ## Installation
 
-### 1. Add this repository as a marketplace
-
-```powershell
-claude plugin marketplace add yshihao636/mypowers
-```
-
-### 2. Install the plugin
-
-```powershell
-claude plugin install mypowers@mypowers
-```
-
-### Interactive (slash-command) equivalent
+Run these commands in a Claude Code session:
 
 ```
 /plugin marketplace add yshihao636/mypowers
 /plugin install mypowers@mypowers
 /reload-plugins
-```
-
-### Verify
-
-```powershell
-claude plugin details mypowers@mypowers
 ```
 
 ## Available Skills
