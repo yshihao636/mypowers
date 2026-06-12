@@ -1,7 +1,7 @@
 {
   "name": "mypowers",
   "displayName": "MyPowers",
-  "description": "A six-skill Claude Code development workflow: design, plan, isolate, implement, and finish.",
+  "description": "A lightweight six-skill Claude Code development workflow: design, plan, isolate, implement, and finish.",
   "version": "1.1.0",
   "author": {
     "name": "yshihao636"

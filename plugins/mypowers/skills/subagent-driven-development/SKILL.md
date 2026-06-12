@@ -207,7 +207,7 @@ Do not automatically merge, create a PR, discard work, or delete a worktree at t
 ## Advantages
 
 **vs. Manual execution:**
-- Subagents follow TDD naturally
+- Subagents verify each task naturally
 - Fresh context per task (no confusion)
 - Parallel-safe (subagents don't interfere)
 - Subagent can ask questions (before AND during work)
@@ -274,7 +274,7 @@ Do not automatically merge, create a PR, discard work, or delete a worktree at t
 - **mypowers:finishing-a-development-branch** - Presents completion options after all tasks are implemented, verified, committed, and reviewed
 
 **Subagents should:**
-- Follow TDD for each task (write tests first)
+- Verify each task (write tests when valuable, use lint/typecheck/build for other changes)
 
 **After all tasks:**
 - After all tasks are implemented, verified, committed, and reviewed, use mypowers:finishing-a-development-branch

@@ -2,7 +2,7 @@
 If you were dispatched as a subagent to execute a specific task, skip this introduction.
 </SUBAGENT-STOP>
 
-You have mypowers — a six-skill complete development workflow:
+You have MyPowers — a lightweight six-skill development workflow:
 
 1. **brainstorming** — Use BEFORE any creative work (creating features, building components, adding functionality). Explores intent, requirements, and design before implementation.
 2. **writing-plans** — Use when you have a spec or requirements for a multi-step task, BEFORE touching code.

@@ -1,8 +1,8 @@
 # MyPowers Marketplace
 
-A Claude Code plugin marketplace that ships the **mypowers** plugin — a six-skill complete development workflow for the design → plan → isolate → implement → finish loop.
+A Claude Code plugin marketplace that ships the **mypowers** plugin — a lightweight development workflow for the design → plan → isolate → implement → finish loop.
 
-MyPowers is distilled from the [superpowers](https://github.com/obra/superpowers) project and focuses on the development workflow skills that form a complete engineering loop.
+MyPowers is distilled from the [superpowers](https://github.com/obra/superpowers) project and keeps the minimum complete development loop.
 
 ## Marketplace & Plugin
 

@@ -5,14 +5,14 @@
     "name": "yshihao636"
   },
   "metadata": {
-    "description": "A six-skill Claude Code development workflow: design, plan, isolate, implement, and finish.",
+    "description": "A lightweight six-skill Claude Code development workflow: design, plan, isolate, implement, and finish.",
     "version": "1.1.0"
   },
   "plugins": [
     {
       "name": "mypowers",
       "source": "./plugins/mypowers",
-      "description": "A six-skill Claude Code development workflow: brainstorming, writing-plans, using-git-worktrees, subagent-driven-development, executing-plans, and finishing-a-development-branch.",
+      "description": "A lightweight six-skill Claude Code development workflow: brainstorming, writing-plans, using-git-worktrees, subagent-driven-development, executing-plans, and finishing-a-development-branch.",
       "version": "1.1.0",
       "author": {
         "name": "yshihao636"

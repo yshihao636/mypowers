@@ -1,15 +1,15 @@
 # MyPowers
 
-A streamlined Claude Code plugin with six development workflow skills: **brainstorming → writing-plans → using-git-worktrees → subagent-driven-development / executing-plans → finishing-a-development-branch**.
+A lightweight Claude Code plugin with six development workflow skills: **brainstorming → writing-plans → using-git-worktrees → subagent-driven-development / executing-plans → finishing-a-development-branch**.
 
-Extracted and refined from [superpowers](https://github.com/obra/superpowers) — keeping the complete development loop while avoiding heavy auto-injection overhead.
+Extracted and refined from [superpowers](https://github.com/obra/superpowers) — keeping the minimum complete development loop while avoiding heavy auto-injection overhead.
 
 ## Skills
 
 | Slash command | When to Use |
 |---------------|-------------|
 | `/mypowers:brainstorming` | Before creative work — explores intent, requirements, and design before implementation. |
-| `/mypowers:writing-plans` | When you have a spec or requirements for a multi-step task, before touching code. Produces bite-sized, TDD-oriented implementation plans. |
+| `/mypowers:writing-plans` | When you have a spec or requirements for a multi-step task, before touching code. Produces bite-sized implementation plans with verification at each step. |
 | `/mypowers:using-git-worktrees` | Before implementation work when changes should be isolated from the current checkout. |
 | `/mypowers:subagent-driven-development` | When executing an implementation plan and subagents are available. Dispatches a fresh subagent per task with two-stage review. |
 | `/mypowers:executing-plans` | When executing a written plan without subagents, or when inline execution is preferred. |
@@ -88,7 +88,7 @@ Turns ideas into fully formed designs through collaborative dialogue:
 
 Creates comprehensive implementation plans for agentic workers:
 - Bite-sized tasks (2-5 minutes per step)
-- TDD-oriented: write failing test → implement → verify → commit
+- Verification-first: write tests for behavior changes, lint/typecheck for config/docs
 - No placeholders — every step contains actual code and commands
 - Recommends **using-git-worktrees** before execution when isolation is appropriate
 - Offers **subagent-driven-development** when subagents are available, or **executing-plans** when subagents are unavailable / inline execution is preferred
