@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+# SessionStart hook for mypowers plugin
+# Injects using-mypowers content as session context
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+PLUGIN_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+
+# Read using-mypowers content
+SKILL_FILE="${PLUGIN_ROOT}/skills/using-mypowers/SKILL.md"
+
+if [ ! -f "$SKILL_FILE" ]; then
+    exit 0
+fi
+
+CONTENT=$(cat "$SKILL_FILE" 2>/dev/null || true)
+if [ -z "$CONTENT" ]; then
+    exit 0
+fi
+
+# Escape for JSON string
+escape_json() {
+    local s="$1"
+    s="${s//\\/\\\\}"
+    s="${s//\"/\\\"}"
+    s="${s//$'\n'/\\n}"
+    s="${s//$'\r'/}"
+    s="${s//$'\t'/\\t}"
+    printf '%s' "$s"
+}
+
+ESCAPED=$(escape_json "$CONTENT")
+
+ADDITIONAL="<EXTREMELY_IMPORTANT>\nYou have mypowers.\n\n**Below is the full content of your 'mypowers:using-mypowers' skill - your introduction to using mypowers skills. For all other skills, use the 'Skill' tool:**\n\n${ESCAPED}\n</EXTREMELY_IMPORTANT>"
+
+# Detect environment and output appropriate JSON format
+if [ -n "${CURSOR_PLUGIN_ROOT:-}" ]; then
+    # Cursor environment
+    printf '{"additional_context":"%s"}\n' "$ADDITIONAL"
+elif [ -n "${CLAUDE_PLUGIN_ROOT:-}" ]; then
+    # Claude Code CLI environment
+    printf '{"hookSpecificOutput":{"hookEventName":"SessionStart","additionalContext":"%s"}}\n' "$ADDITIONAL"
+else
+    # Generic / fallback
+    printf '{"additionalContext":"%s"}\n' "$ADDITIONAL"
+fi
+
+exit 0
