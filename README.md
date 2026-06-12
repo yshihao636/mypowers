@@ -4,6 +4,25 @@ A Claude Code plugin marketplace that ships the **mypowers** plugin — a lightw
 
 MyPowers is distilled from the [superpowers](https://github.com/obra/superpowers) project and keeps the minimum complete development loop.
 
+## Why MyPowers?
+
+MyPowers is for users who want the useful development workflow from Superpowers without adopting the full Superpowers methodology.
+
+It keeps the minimum loop:
+
+```text
+design → plan → isolate → implement → finish
+```
+
+It intentionally avoids:
+
+- the full Superpowers skill library
+- heavy auto-injection
+- TDD-first requirements for every change
+- extra project scaffolding, CI, or test framework assumptions
+
+Use Superpowers if you want the full methodology. Use MyPowers if you want a lightweight Claude Code workflow plugin.
+
 ## Marketplace & Plugin
 
 - **Marketplace name:** `mypowers`
