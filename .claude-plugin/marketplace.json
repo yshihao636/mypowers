@@ -1,1 +1,31 @@
-{"$schema": "https://anthropic.com/claude-code/marketplace.schema.json", "name": "mypowers", "id": "mypowers", "owner": {"name": "yshihao636"}, "metadata": {"description": "Core development workflow skills: brainstorming, writing-plans, and subagent-driven-development", "version": "1.0.0"}, "plugins": [{"name": "mypowers", "source": "./", "description": "Core development workflow skills: brainstorming, writing-plans, and subagent-driven-development. A streamlined alternative to superpowers with just the three essential skills for the design to plan to implement workflow.", "version": "1.0.0", "author": {"name": "yshihao636"}, "keywords": ["workflow", "planning", "brainstorming", "subagent", "tdd"], "category": "development"}]}
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "mypowers",
+  "id": "mypowers",
+  "owner": {
+    "name": "yshihao636"
+  },
+  "metadata": {
+    "description": "Core development workflow skills: brainstorming, writing-plans, and subagent-driven-development",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "mypowers",
+      "source": "./plugins/mypowers",
+      "description": "Core development workflow skills: brainstorming, writing-plans, and subagent-driven-development. A streamlined alternative to superpowers with just the three essential skills for the design to plan to implement workflow.",
+      "version": "1.0.0",
+      "author": {
+        "name": "yshihao636"
+      },
+      "keywords": [
+        "workflow",
+        "planning",
+        "brainstorming",
+        "subagent",
+        "tdd"
+      ],
+      "category": "development"
+    }
+  ]
+}
