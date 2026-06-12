@@ -63,7 +63,7 @@ digraph process {
     "Read plan, extract all tasks with full text, note context, create TodoWrite" [shape=box];
     "More tasks remain?" [shape=diamond];
     "Dispatch final code reviewer subagent for entire implementation" [shape=box];
-    "All tasks complete — report to user" [shape=box style=filled fillcolor=lightgreen];
+    "Use mypowers:finishing-a-development-branch" [shape=doublecircle style=filled fillcolor=lightgreen];
 
     "Read plan, extract all tasks with full text, note context, create TodoWrite" -> "Dispatch implementer subagent (./implementer-prompt.md)";
     "Dispatch implementer subagent (./implementer-prompt.md)" -> "Implementer subagent asks questions?";
@@ -82,7 +82,7 @@ digraph process {
     "Mark task complete in TodoWrite" -> "More tasks remain?";
     "More tasks remain?" -> "Dispatch implementer subagent (./implementer-prompt.md)" [label="yes"];
     "More tasks remain?" -> "Dispatch final code reviewer subagent for entire implementation" [label="no"];
-    "Dispatch final code reviewer subagent for entire implementation" -> "All tasks complete — report to user";
+    "Dispatch final code reviewer subagent for entire implementation" -> "Use mypowers:finishing-a-development-branch";
 }
 ```
 
@@ -196,10 +196,13 @@ Code reviewer: ✅ Approved
 
 [After all tasks]
 [Dispatch final code-reviewer]
-Final reviewer: All requirements met, ready to merge
+Final reviewer: All requirements met, ready to complete development branch
 
-Done!
+[Use mypowers:finishing-a-development-branch]
+[That skill verifies tests, presents structured completion options, and waits for the user's choice]
 ```
+
+Do not automatically merge, create a PR, discard work, or delete a worktree at this point. The finishing skill must present options and wait for the user to choose.
 
 ## Advantages
 
@@ -268,9 +271,15 @@ Done!
 
 **Related workflow skills:**
 - **mypowers:writing-plans** - Creates the plan this skill executes
+- **mypowers:finishing-a-development-branch** - Presents completion options after all tasks are implemented, verified, committed, and reviewed
 
 **Subagents should:**
 - Follow TDD for each task (write tests first)
 
 **After all tasks:**
-- Complete development branch (merge, PR, or cleanup as appropriate)
+- After all tasks are implemented, verified, committed, and reviewed, use mypowers:finishing-a-development-branch
+- Do not automatically merge
+- Do not automatically create a PR
+- Do not automatically discard work
+- Do not automatically delete a worktree
+- The finishing skill presents options and waits for the user to choose

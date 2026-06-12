@@ -7,7 +7,7 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PLUGIN_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 
 # Read using-mypowers content
-SKILL_FILE="${PLUGIN_ROOT}/skills/using-mypowers/SKILL.md"
+SKILL_FILE="${PLUGIN_ROOT}/docs/using-mypowers.md"
 
 if [ ! -f "$SKILL_FILE" ]; then
     exit 0
@@ -31,7 +31,7 @@ escape_json() {
 
 ESCAPED=$(escape_json "$CONTENT")
 
-ADDITIONAL="<EXTREMELY_IMPORTANT>\nYou have mypowers.\n\n**Below is the full content of your 'mypowers:using-mypowers' skill - your introduction to using mypowers skills. For all other skills, use the 'Skill' tool:**\n\n${ESCAPED}\n</EXTREMELY_IMPORTANT>"
+ADDITIONAL="<EXTREMELY_IMPORTANT>\nYou have mypowers.\n\n**Below is the mypowers introduction. It is session context, not a user-callable skill. For callable skills, use the 'Skill' tool:**\n\n${ESCAPED}\n</EXTREMELY_IMPORTANT>"
 
 # Detect environment and output appropriate JSON format
 if [ -n "${CURSOR_PLUGIN_ROOT:-}" ]; then

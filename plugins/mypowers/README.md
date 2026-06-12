@@ -1,28 +1,40 @@
 # MyPowers
 
-A streamlined Claude Code plugin with three core development workflow skills: **brainstorming → writing-plans → subagent-driven-development**.
+A streamlined Claude Code plugin with six development workflow skills: **brainstorming → writing-plans → using-git-worktrees → subagent-driven-development / executing-plans → finishing-a-development-branch**.
 
-Extracted and refined from [superpowers](https://github.com/obra/superpowers) — keeping only the three essential skills for the design→plan→implement workflow, without the heavy auto-injection overhead.
+Extracted and refined from [superpowers](https://github.com/obra/superpowers) — keeping the complete development loop while avoiding heavy auto-injection overhead.
 
 ## Skills
 
-| Skill | When to Use |
-|-------|-------------|
-| **brainstorming** | Before any creative work — creating features, building components, adding functionality. Explores intent, requirements, and design before implementation. |
-| **writing-plans** | When you have a spec or requirements for a multi-step task, before touching code. Produces bite-sized, TDD-oriented implementation plans. |
-| **subagent-driven-development** | When executing implementation plans with independent tasks. Dispatches a fresh subagent per task with two-stage review (spec compliance + code quality). |
-| **using-mypowers** *(intro)* | Auto-injected on session start. Briefly introduces the three core skills and when to use them. Also available as `/mypowers:using-mypowers`. |
+| Slash command | When to Use |
+|---------------|-------------|
+| `/mypowers:brainstorming` | Before creative work — creating features, building components, adding functionality. Explores intent, requirements, and design before implementation. |
+| `/mypowers:writing-plans` | When you have a spec or requirements for a multi-step task, before touching code. Produces bite-sized, TDD-oriented implementation plans. |
+| `/mypowers:using-git-worktrees` | Before executing development work when isolation from the current branch is appropriate. |
+| `/mypowers:subagent-driven-development` | When executing implementation plans and subagents are available. Dispatches a fresh subagent per task with two-stage review. |
+| `/mypowers:executing-plans` | When executing written plans without subagents, or when inline / separate-session execution is preferred. |
+| `/mypowers:finishing-a-development-branch` | After implementation, verification, commits, and review, to present completion options and wait for user choice. |
+
+`using-mypowers` is not a user-callable skill. It is stored in `docs/using-mypowers.md` and injected by the SessionStart hook as a lightweight introduction.
 
 ## Workflow
 
-```
-User request → brainstorming (design) → writing-plans (plan) → subagent-driven-development (execute)
+```text
+User request
+  → brainstorming (design)
+  → writing-plans (plan)
+  → using-git-worktrees (isolate when appropriate)
+  → subagent-driven-development OR executing-plans (execute)
+  → finishing-a-development-branch (choose merge / PR / keep / discard)
 ```
 
 These skills chain naturally:
-1. **brainstorming** produces a validated spec
-2. **writing-plans** turns it into a step-by-step plan
-3. **subagent-driven-development** executes it with fresh subagents per task
+
+1. **brainstorming** produces a validated spec.
+2. **writing-plans** turns it into a step-by-step implementation plan.
+3. **using-git-worktrees** prepares an isolated workspace when appropriate.
+4. **subagent-driven-development** executes with subagents when available, or **executing-plans** executes inline / in a separate session when subagents are unavailable or not preferred.
+5. **finishing-a-development-branch** verifies completion and presents structured options without automatically merging, creating PRs, discarding work, or deleting worktrees.
 
 ## Installation
 
@@ -49,16 +61,16 @@ Or in an interactive session:
 2. Add `"mypowers@mypowers": true` to `enabledPlugins` in `~/.claude/settings.json`
 3. Run `/reload-plugins`
 
-## What's Different from Superpowers
+## Design Notes
 
-| | Superpowers | MyPowers |
-|---|-------------|----------|
-| Skills | 13 (full suite) | 4 (3 core + intro skill) |
-| Auto-injection | Heavy (`using-superpowers` with EXTREMELY_IMPORTANT block) | Light (`using-mypowers` brief intro) |
-| SessionStart hook | Forces skill check on every message | Gentle introduction, no forced checks |
-| Spec path | `docs/superpowers/specs/` | `docs/specs/` |
-| Plan path | `docs/superpowers/plans/` | `docs/plans/` |
-| Dependencies | using-git-worktrees, executing-plans, finishing-a-development-branch, test-driven-development, etc. | Self-contained |
+| Area | MyPowers behavior |
+|------|-------------------|
+| Skills | 6 development workflow skills |
+| Auto-injection | Light docs-based introduction (`docs/using-mypowers.md`) |
+| SessionStart hook | Gentle introduction, no forced checks |
+| Spec path | `docs/specs/` |
+| Plan path | `docs/plans/` |
+| Worktree path | `~/.config/mypowers/worktrees/` with legacy fallback |
 
 ## Skill Details
 
@@ -78,8 +90,17 @@ Creates comprehensive implementation plans for agentic workers:
 - Bite-sized tasks (2-5 minutes per step)
 - TDD-oriented: write failing test → implement → verify → commit
 - No placeholders — every step contains actual code and commands
-- Self-review checklist for completeness and type consistency
-- Auto-transitions to **subagent-driven-development** when done
+- Recommends **using-git-worktrees** before execution when isolation is appropriate
+- Offers **subagent-driven-development** when subagents are available, or **executing-plans** when subagents are unavailable / inline execution is preferred
+
+### Using Git Worktrees
+
+Sets up or verifies an isolated workspace:
+- Detects existing isolation first
+- Prefers native harness worktree tools when available
+- Falls back to git worktrees only when needed
+- Defaults to project-local `.worktrees/` or `~/.config/mypowers/worktrees/` where appropriate
+- Supports `~/.config/superpowers/worktrees/` as a legacy fallback
 
 ### Subagent-Driven Development
 
@@ -88,8 +109,26 @@ Executes plans with fresh subagents per task:
 - **Spec reviewer** verifies code matches the spec
 - **Code quality reviewer** checks for clean, maintainable code
 - Continuous execution — no pauses between tasks
-- Model selection based on task complexity
+- After all tasks are implemented, verified, committed, and reviewed, transitions to **finishing-a-development-branch**
+
+### Executing Plans
+
+Executes written plans without subagents or when inline execution is preferred:
+- Loads and reviews the plan critically before starting
+- Executes tasks sequentially with verification
+- Stops when blocked instead of guessing
+- Never starts implementation on main/master without explicit user consent
+- Transitions to **finishing-a-development-branch** after completion
+
+### Finishing a Development Branch
+
+Guides completion of implementation work:
+- Verifies tests pass before presenting options
+- Detects normal repo vs worktree vs detached HEAD
+- Presents structured options: merge locally, push/create PR, keep as-is, or discard
+- Waits for user choice before taking any outward-facing or destructive action
+- Does not automatically merge, create PRs, discard work, or delete worktrees
 
 ## License
 
-MIT
+MIT. Adapted from [superpowers](https://github.com/obra/superpowers); attribution to the original project is preserved.

@@ -13,7 +13,7 @@ Assume they are a skilled developer, but know almost nothing about our toolset o
 
 **Announce at start:** "I'm using the writing-plans skill to create the implementation plan."
 
-**Context:** If working in an isolated worktree, create one via git worktree or branch isolation before execution.
+**Context:** Before writing a plan for development work that will be executed, recommend using `mypowers:using-git-worktrees` to set up or verify an isolated workspace when appropriate.
 
 **Save plans to:** `docs/plans/YYYY-MM-DD-<feature-name>.md`
 - (User preferences for plan location override this default)
@@ -49,7 +49,7 @@ This structure informs the task decomposition. Each task should produce self-con
 ```markdown
 # [Feature Name] Implementation Plan
 
-> **For agentic workers:** Use mypowers:subagent-driven-development to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** Use mypowers:subagent-driven-development when subagents are available. Use mypowers:executing-plans when subagents are unavailable or when inline execution is preferred. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** [One sentence describing what this builds]
 
@@ -135,11 +135,11 @@ If you find issues, fix them inline. No need to re-review — just fix and move 
 
 After saving the plan, offer execution choice:
 
-**"Plan complete and saved to `docs/plans/<filename>.md`. Two execution options:**
+**"Plan complete and saved to `docs/plans/<filename>.md`. Before execution, use `mypowers:using-git-worktrees` if this work should be isolated from the current branch. Two execution options:**
 
-**1. Subagent-Driven (recommended)** - I dispatch a fresh subagent per task, review between tasks, fast iteration
+**1. Subagent-Driven (recommended when subagents are available)** - Use mypowers:subagent-driven-development. I dispatch a fresh subagent per task, review between tasks, fast iteration.
 
-**2. Inline Execution** - Execute tasks sequentially in this session with checkpoints
+**2. Inline / Separate Session Execution** - Use mypowers:executing-plans when subagents are unavailable or when inline execution is preferred.
 
 **Which approach?"**
 
@@ -147,5 +147,6 @@ After saving the plan, offer execution choice:
 - Use mypowers:subagent-driven-development
 - Fresh subagent per task + two-stage review
 
-**If Inline Execution chosen:**
-- Execute tasks sequentially in this session with checkpoints for review
+**If Inline / Separate Session Execution chosen:**
+- Use mypowers:executing-plans
+- Execute tasks sequentially with review checkpoints
