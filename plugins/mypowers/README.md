@@ -11,6 +11,7 @@ Extracted and refined from [superpowers](https://github.com/obra/superpowers) â€
 | **brainstorming** | Before any creative work â€” creating features, building components, adding functionality. Explores intent, requirements, and design before implementation. |
 | **writing-plans** | When you have a spec or requirements for a multi-step task, before touching code. Produces bite-sized, TDD-oriented implementation plans. |
 | **subagent-driven-development** | When executing implementation plans with independent tasks. Dispatches a fresh subagent per task with two-stage review (spec compliance + code quality). |
+| **using-mypowers** *(intro)* | Auto-injected on session start. Briefly introduces the three core skills and when to use them. Also available as `/mypowers:using-mypowers`. |
 
 ## Workflow
 
@@ -25,16 +26,21 @@ These skills chain naturally:
 
 ## Installation
 
-### Claude Code
+### Claude Code (via marketplace)
+
+Add this repository as a marketplace, then install the plugin:
 
 ```bash
-/plugin install https://github.com/yshihao636/mypowers.git
+claude plugin marketplace add yshihao636/mypowers
+claude plugin install mypowers@mypowers
 ```
 
-Or via the plugin marketplace:
+Or in an interactive session:
 
-```bash
-/plugin install mypowers
+```
+/plugin marketplace add yshihao636/mypowers
+/plugin install mypowers@mypowers
+/reload-plugins
 ```
 
 ### Manual
@@ -47,7 +53,7 @@ Or via the plugin marketplace:
 
 | | Superpowers | MyPowers |
 |---|-------------|----------|
-| Skills | 13 (full suite) | 4 (3 core + using-mypowers) |
+| Skills | 13 (full suite) | 4 (3 core + intro skill) |
 | Auto-injection | Heavy (`using-superpowers` with EXTREMELY_IMPORTANT block) | Light (`using-mypowers` brief intro) |
 | SessionStart hook | Forces skill check on every message | Gentle introduction, no forced checks |
 | Spec path | `docs/superpowers/specs/` | `docs/specs/` |

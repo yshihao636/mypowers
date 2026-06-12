@@ -1,16 +1,12 @@
 {
   "name": "mypowers",
+  "displayName": "MyPowers",
   "description": "Core development workflow skills: brainstorming, writing-plans, and subagent-driven-development. A streamlined alternative to superpowers with just the three essential skills for the design to plan to implement workflow.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": {
     "name": "yshihao636"
   },
-  "skills": [
-    "./skills/using-mypowers",
-    "./skills/brainstorming",
-    "./skills/writing-plans",
-    "./skills/subagent-driven-development"
-  ],
+  "repository": "https://github.com/yshihao636/mypowers.git",
   "license": "MIT",
   "keywords": [
     "workflow",
