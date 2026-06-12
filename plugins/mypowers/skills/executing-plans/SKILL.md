@@ -1,6 +1,6 @@
 ---
 name: executing-plans
-description: Use when you have a written implementation plan to execute in a separate session with review checkpoints
+description: Use when executing a written implementation plan sequentially in the current session, especially when subagents are unavailable or inline execution is preferred.
 ---
 
 # Executing Plans

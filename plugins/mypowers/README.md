@@ -8,12 +8,12 @@ Extracted and refined from [superpowers](https://github.com/obra/superpowers) �
 
 | Slash command | When to Use |
 |---------------|-------------|
-| `/mypowers:brainstorming` | Before creative work — creating features, building components, adding functionality. Explores intent, requirements, and design before implementation. |
+| `/mypowers:brainstorming` | Before creative work — explores intent, requirements, and design before implementation. |
 | `/mypowers:writing-plans` | When you have a spec or requirements for a multi-step task, before touching code. Produces bite-sized, TDD-oriented implementation plans. |
-| `/mypowers:using-git-worktrees` | Before executing development work when isolation from the current branch is appropriate. |
-| `/mypowers:subagent-driven-development` | When executing implementation plans and subagents are available. Dispatches a fresh subagent per task with two-stage review. |
-| `/mypowers:executing-plans` | When executing written plans without subagents, or when inline / separate-session execution is preferred. |
-| `/mypowers:finishing-a-development-branch` | After implementation, verification, commits, and review, to present completion options and wait for user choice. |
+| `/mypowers:using-git-worktrees` | Before implementation work when changes should be isolated from the current checkout. |
+| `/mypowers:subagent-driven-development` | When executing an implementation plan and subagents are available. Dispatches a fresh subagent per task with two-stage review. |
+| `/mypowers:executing-plans` | When executing a written plan without subagents, or when inline execution is preferred. |
+| `/mypowers:finishing-a-development-branch` | After implementation is complete and verified. Presents safe options to merge, create a PR, keep, or discard the branch/worktree. |
 
 `using-mypowers` is not a user-callable skill. It is stored in `docs/using-mypowers.md` and injected by the SessionStart hook as a lightweight introduction.
 
@@ -42,7 +42,7 @@ These skills chain naturally:
 
 Add this repository as a marketplace, then install the plugin:
 
-```bash
+```powershell
 claude plugin marketplace add yshihao636/mypowers
 claude plugin install mypowers@mypowers
 ```
@@ -67,7 +67,7 @@ Or in an interactive session:
 |------|-------------------|
 | Skills | 6 development workflow skills |
 | Auto-injection | Light docs-based introduction (`docs/using-mypowers.md`) |
-| SessionStart hook | Gentle introduction, no forced checks |
+| SessionStart hook | PowerShell-based, gentle introduction |
 | Spec path | `docs/specs/` |
 | Plan path | `docs/plans/` |
 | Worktree path | `~/.config/mypowers/worktrees/` with legacy fallback |
@@ -100,7 +100,6 @@ Sets up or verifies an isolated workspace:
 - Prefers native harness worktree tools when available
 - Falls back to git worktrees only when needed
 - Defaults to project-local `.worktrees/` or `~/.config/mypowers/worktrees/` where appropriate
-- Supports `~/.config/superpowers/worktrees/` as a legacy fallback
 
 ### Subagent-Driven Development
 

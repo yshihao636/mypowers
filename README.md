@@ -15,13 +15,13 @@ MyPowers is distilled from the [superpowers](https://github.com/obra/superpowers
 
 ### 1. Add this repository as a marketplace
 
-```bash
+```powershell
 claude plugin marketplace add yshihao636/mypowers
 ```
 
 ### 2. Install the plugin
 
-```bash
+```powershell
 claude plugin install mypowers@mypowers
 ```
 
@@ -35,7 +35,7 @@ claude plugin install mypowers@mypowers
 
 ### Verify
 
-```bash
+```powershell
 claude plugin details mypowers@mypowers
 ```
 
@@ -47,10 +47,10 @@ Once installed, the following skills are available:
 |---------------|-------------|
 | `/mypowers:brainstorming` | Before creative work — explores intent, requirements, and design before implementation. |
 | `/mypowers:writing-plans` | When you have a spec or requirements for a multi-step task, before touching code. |
-| `/mypowers:using-git-worktrees` | Before executing development work when isolation from the current branch is appropriate. |
-| `/mypowers:subagent-driven-development` | When executing implementation plans and subagents are available. |
-| `/mypowers:executing-plans` | When executing written plans without subagents, or when inline / separate-session execution is preferred. |
-| `/mypowers:finishing-a-development-branch` | After implementation, verification, commits, and review, to present completion options and wait for user choice. |
+| `/mypowers:using-git-worktrees` | Before implementation work when changes should be isolated from the current checkout. |
+| `/mypowers:subagent-driven-development` | When executing an implementation plan and subagents are available. |
+| `/mypowers:executing-plans` | When executing a written plan without subagents, or when inline execution is preferred. |
+| `/mypowers:finishing-a-development-branch` | After implementation is complete and verified, presents safe options to merge, PR, keep, or discard. |
 
 The full workflow:
 
@@ -64,7 +64,7 @@ brainstorming → writing-plans → using-git-worktrees → subagent-driven-deve
 
 To work on this marketplace / plugin locally:
 
-```bash
+```powershell
 # 1. Clone the repository
 git clone https://github.com/yshihao636/mypowers.git
 cd mypowers
@@ -77,7 +77,7 @@ claude plugin install mypowers@mypowers
 
 # 4. Validate before pushing
 claude plugin validate .
-claude plugin validate ./plugins/mypowers
+claude plugin validate .\plugins\mypowers
 ```
 
 ## Repository Layout
@@ -95,6 +95,9 @@ claude plugin validate ./plugins/mypowers
 │       ├── docs/
 │       │   └── using-mypowers.md # SessionStart introduction, not a callable skill
 │       ├── hooks/                # SessionStart hook
+│       │   ├── hooks.json
+│       │   ├── run-hook.cmd      # Windows cmd wrapper
+│       │   └── session-start.ps1 # PowerShell hook script
 │       └── skills/               # Auto-discovered callable skills
 │           ├── brainstorming/
 │           ├── writing-plans/

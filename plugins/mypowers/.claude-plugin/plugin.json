@@ -1,7 +1,7 @@
 {
   "name": "mypowers",
   "displayName": "MyPowers",
-  "description": "Complete development workflow skills: brainstorming, writing-plans, using-git-worktrees, subagent-driven-development, executing-plans, and finishing-a-development-branch.",
+  "description": "A six-skill Claude Code development workflow: design, plan, isolate, implement, and finish.",
   "version": "1.1.0",
   "author": {
     "name": "yshihao636"
@@ -13,6 +13,7 @@
     "planning",
     "brainstorming",
     "subagent",
-    "tdd"
+    "tdd",
+    "worktree"
   ]
 }
