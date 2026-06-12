@@ -65,42 +65,38 @@ This structure informs the task decomposition. Each task should produce self-con
 ### Task N: [Component Name]
 
 **Files:**
-- Create: `exact/path/to/file.py`
-- Modify: `exact/path/to/existing.py:123-145`
-- Verify: `tests/exact/path/to/test.py` (or note lint/typecheck command)
+- Create: `exact/path/to/file`
+- Modify: `exact/path/to/existing-file:123-145`
+- Verify: exact verification command (see below)
 
 - [ ] **Step 1: Set up verification**
 
-For behavior changes, write a test:
+Choose the appropriate verification method:
 
-```python
-def test_specific_behavior():
-    result = function(input)
-    assert result == expected
-```
+| Change type | Verification |
+|---|---|
+| Plugin manifest / hooks / JSON | `claude plugin validate .` or `Test-Json` in PowerShell |
+| Behavior / logic code | Project test command (e.g. project test runner) |
+| Config / docs / prompts | `Get-Content <file> \| Test-Json` or manual check |
+| Build / compile | Project build command |
 
-For config/docs/hooks, note the verification command:
-
-```
-Run: `claude plugin validate .` or `python -m json.tool <file>`
-```
+Include the exact command in the step.
 
 - [ ] **Step 2: Implement the change**
 
-```python
-def function(input):
-    return expected
+```language
+// actual code here
 ```
 
 - [ ] **Step 3: Verify**
 
-Run: `pytest tests/path/test.py::test_name -v` (or appropriate verification command)
-Expected: PASS
+Run: `<exact verification command>`
+Expected: PASS / valid / no errors
 
 - [ ] **Step 4: Commit**
 
 ```bash
-git add tests/path/test.py src/path/file.py
+git add <files>
 git commit -m "feat: add specific feature"
 ```
 ````

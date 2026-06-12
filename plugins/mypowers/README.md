@@ -104,7 +104,7 @@ Sets up or verifies an isolated workspace:
 ### Subagent-Driven Development
 
 Executes plans with fresh subagents per task:
-- **Implementer** subagent writes code, tests, and commits
+- **Implementer** subagent writes code, runs appropriate verification, and commits
 - **Spec reviewer** verifies code matches the spec
 - **Code quality reviewer** checks for clean, maintainable code
 - Continuous execution — no pauses between tasks
